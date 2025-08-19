@@ -222,6 +222,24 @@ void printlist()
 
 }
 
+void countNode()
+{
+    if(head == NULL)
+    {
+        cout << "List is empty." << endl;
+        return;
+    }
+    node* temp=head;
+    int count = 0;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }   
+    cout << "Number of nodes in the list: " << count << endl;
+    cout << endl;   
+}
+
 void choice()
 {
     cout << "1. Insert at head" << endl;
@@ -235,7 +253,9 @@ void choice()
     cout << "7. Search" << endl;
     cout << "8. Print list" << endl;
     cout<<"88.prent reversed list"<<endl;
-    cout << "9. Exit" << endl;
+
+    cout << "10. Count nodes" << endl;
+    cout << "0. Exit" << endl;
     
     cout << "Enter your choice: ";
     cout << endl;
@@ -318,8 +338,12 @@ int main()
             printReversed();
             cout << endl;
         }
+        else if (ch == 10)
+        {
+            countNode();
+        }
 
-        else if (ch == 9)
+        else if (ch == 0)
         {
             break; // Exit the loop
         }
