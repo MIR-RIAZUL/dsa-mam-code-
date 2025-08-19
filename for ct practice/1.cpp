@@ -20,23 +20,23 @@ void inserthead(int x)
 
 void insertend(int x)
 {
-    node* newitem= new node();
+    node *newitem = new node();
     newitem->val = x;
     newitem->next = NULL;
-    if(head == NULL)
+    if (head == NULL)
     {
         head = newitem;
         return;
     }
-    node* temp = head;
-    while(temp->next != NULL)
+    node *temp = head;
+    while (temp->next != NULL)
     {
         temp = temp->next;
     }
     temp->next = newitem;
 }
 
-void insert_in_position(int x,int pos)
+void insert_in_position(int x, int pos)
 {
     node *newitem = new node();
     newitem->val = x;
@@ -47,106 +47,103 @@ void insert_in_position(int x,int pos)
         return;
     }
     node *temp = head;
-   for(int i=1;i<pos-1;i++)
-   {
-    temp = temp->next;
-   }
-   newitem->next= temp->next;
-   temp->next = newitem;
+    for (int i = 1; i < pos - 1; i++)
+    {
+        temp = temp->next;
+    }
+    newitem->next = temp->next;
+    temp->next = newitem;
 }
- void insert_after_value(int x, int value)
- {
-    node* newitem = new node();
+void insert_after_value(int x, int value)
+{
+    node *newitem = new node();
     newitem->val = x;
     if (head == NULL) // If list is empty
     {
         cout << "List is empty, cannot insert after value." << endl;
         return;
     }
-    node* temp = head;
-    while(temp != NULL && temp->val != value)
+    node *temp = head;
+    while (temp != NULL && temp->val != value)
     {
         temp = temp->next;
     }
     newitem->next = temp->next;
     temp->next = newitem;
+}
 
- }
-
- void deletehead()
- {
+void deletehead()
+{
     if (head == NULL)
     {
         cout << "List is empty, cannot delete head." << endl;
         return;
     }
-    node* temp=head;
+    node *temp = head;
     head = head->next;
-    delete temp;   
- }
- void deletetail()
- {
-    if(head == NULL)
+    delete temp;
+}
+void deletetail()
+{
+    if (head == NULL)
     {
         cout << "List is empty, cannot delete tail." << endl;
         return;
     }
-    if(head->next == NULL) // Only one element
+    if (head->next == NULL) // Only one element
     {
         delete head;
         head = NULL;
         return;
     }
-    node* temp = head;
-    while(temp->next->next != NULL) // Traverse to the second last node
+    node *temp = head;
+    while (temp->next->next != NULL) // Traverse to the second last node
     {
         temp = temp->next;
     }
     delete temp->next; // Delete the last node
-     temp->next = NULL; // Set the second last node's next to NULL
+    temp->next = NULL; // Set the second last node's next to NULL
 }
 
 void delete_at_position(int pos)
-{ 
-    if(head == NULL)
+{
+    if (head == NULL)
     {
         cout << "List is empty, cannot delete at position." << endl;
         return;
     }
-    else if(pos==0)
+    else if (pos == 0)
     {
         deletehead();
         return;
     }
-    node* temp = head;
-    for(int i=0; i<pos-1 && temp != NULL; i++)
+    node *temp = head;
+    for (int i = 0; i < pos - 1 && temp != NULL; i++)
     {
         temp = temp->next;
     }
-    node* t0delete = temp->next;
+    node *t0delete = temp->next;
     temp->next = temp->next->next;
     delete t0delete; // Delete the node at position
-    
-    
 }
 void deleteAfrer(int value)
 {
-    if(head == NULL)
+    if (head == NULL)
     {
         cout << "List is empty, cannot delete after value." << endl;
         return;
     }
-    node* temp = head;
-    while(temp->val !=value)
+    node *temp = head;
+    while (temp->val != value)
     {
-        if(temp->next == NULL)
+        if (temp->next == NULL)
         {
             cout << "Value not found in the list." << endl;
             return;
         }
         temp = temp->next;
     }
-    node* t0delete = temp->next;
+    node *t0delete = temp->next;
     temp->next = temp->next->next;
     delete t0delete; // Delete the node after the value
 }
@@ -154,44 +151,43 @@ void printReversed()
 {
     if (head == NULL)
     {
-        cout<< "List is empty." << endl;
+        cout << "List is empty." << endl;
         return;
     }
 
-    node* current = head; 
-    node* prev = NULL;
-    node* next = NULL;
+    node *current = head;
+    node *prev = NULL;
+    node *next = NULL;
     while (current != NULL)
     {
         next = current->next; // Store the next node
         current->next = prev; // Reverse the link
-        prev = current; // Move prev to current
-        current = next; // Move to the next node
+        prev = current;       // Move prev to current
+        current = next;       // Move to the next node
     }
     head = prev; // Update head to the new first node
     cout << "Reversed List: ";
-    node* temp = head;
+    node *temp = head;
     while (temp != NULL)
     {
         cout << temp->val << " ";
         temp = temp->next;
     }
-    
 }
 
 void search(int value)
 {
-    if(head == NULL)
+    if (head == NULL)
     {
         cout << "List is empty, cannot search." << endl;
         return;
     }
-    node* temp = head;
-    int count=0;
-    while(temp != NULL)
+    node *temp = head;
+    int count = 0;
+    while (temp != NULL)
     {
-      
-        if(temp->val == value)
+
+        if (temp->val == value)
         {
             cout << "Value " << value << " found in the list." << endl;
             cout << "Position: " << count << endl;
@@ -205,13 +201,13 @@ void search(int value)
 
 void printlist()
 {
-    cout<<endl;
-    cout<< "List: ";
+    cout << endl;
+    cout << "List: ";
     if (head == NULL)
     {
         cout << "List is empty." << endl;
         return;
-    }  
+    }
     node *temp = head;
     while (temp != NULL)
     {
@@ -219,57 +215,92 @@ void printlist()
         temp = temp->next;
     }
     cout << endl;
-
 }
 
 void countNode()
 {
-    if(head == NULL)
+    if (head == NULL)
     {
         cout << "List is empty." << endl;
         return;
     }
-    node* temp=head;
+    node *temp = head;
     int count = 0;
-    while(temp != NULL)
+    while (temp != NULL)
     {
         count++;
         temp = temp->next;
-    }   
+    }
     cout << "Number of nodes in the list: " << count << endl;
-    cout << endl;   
+    cout << endl;
 }
 void findMiddleElement()
 {
-    if(head == NULL)
+    if (head == NULL)
     {
         cout << "List is empty, cannot find middle element." << endl;
         return;
     }
-    node* temp=head;
+    node *temp = head;
     int count = 0;
-    while(temp != NULL)
+    while (temp != NULL)
     {
         count++;
         temp = temp->next;
-    } 
+    }
     int mid = count / 2;
 
-    if( count % 2 == 0)
+    if (count % 2 == 0)
     {
-         cout<<"this is even number, so mid doesnot exist"<<endl;
-         return;
+        cout << "this is even number, so mid doesnot exist" << endl;
+        return;
     }
     else
     {
-    temp = head;
-    for(int i=0; i<mid; i++)
+        temp = head;
+        for (int i = 0; i < mid; i++)
+        {
+            temp = temp->next;
+        }
+        cout << "Middle element: " << temp->val << endl;
+        cout << endl;
+    }
+}
+void insertMiddleofthelist(int x)
+{
+    node* newitem= new node();
+    newitem->val=x;
+    newitem->next=NULL;
+     if(head==NULL)
     {
+        cout << "List is empty, cannot insert in middle." << endl;
+        return;
+    }
+    node *temp = head;
+    int count = 0;
+    while (temp != NULL)
+    {
+        count++;
         temp = temp->next;
     }
-    cout << "Middle element: " << temp->val << endl;
-    cout << endl;  
+    int mid = count / 2;
+
+    if (count % 2 == 0)
+    {
+        cout << "this is even number, so mid doesnot exist" << endl;
+        return;
     }
+    else
+    {
+        temp = head;
+        for (int i = 0; i < mid-1; i++)
+        {
+            temp = temp->next;
+        }
+        newitem->next=temp->next;
+        temp->next=newitem;
+    }
+
 
 }
 
@@ -278,19 +309,19 @@ void choice()
     cout << "1. Insert at head" << endl;
     cout << "2. insert at tail" << endl;
     cout << "3. Insert at position" << endl;
-    cout << "33.Insert after the value"<< endl;
+    cout << "33.Insert after the value" << endl;
     cout << "4. Delete at head" << endl;
     cout << "5. Delete at tail" << endl;
     cout << "6. Delete at position" << endl;
     cout << "66.Delete after the value" << endl;
     cout << "7. Search" << endl;
     cout << "8. Print list" << endl;
-    cout<<"88.prent reversed list"<<endl;
+    cout << "88.prent reversed list" << endl;
     cout << "9. Find middle element" << endl;
-
     cout << "10. Count nodes" << endl;
+    cout << "11. Insert at middle" << endl;
     cout << "0. Exit" << endl;
-    
+
     cout << "Enter your choice: ";
     cout << endl;
 }
@@ -300,7 +331,7 @@ int main()
     while (true)
     {
         choice();
-        
+
         int ch;
         cin >> ch;
 
@@ -374,12 +405,21 @@ int main()
         }
         else if (ch == 9)
         {
-           findMiddleElement();
+            findMiddleElement();
         }
         else if (ch == 10)
         {
             countNode();
         }
+        else if (ch==11)
+        {
+            int n;
+          
+            cout<<"enter the value:"<<endl;
+             cin>>n;
+            insertMiddleofthelist(n);
+        }
+        
 
         else if (ch == 0)
         {
