@@ -239,6 +239,39 @@ void countNode()
     cout << "Number of nodes in the list: " << count << endl;
     cout << endl;   
 }
+void findMiddleElement()
+{
+    if(head == NULL)
+    {
+        cout << "List is empty, cannot find middle element." << endl;
+        return;
+    }
+    node* temp=head;
+    int count = 0;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    } 
+    int mid = count / 2;
+
+    if( count % 2 == 0)
+    {
+         cout<<"this is even number, so mid doesnot exist"<<endl;
+         return;
+    }
+    else
+    {
+    temp = head;
+    for(int i=0; i<mid; i++)
+    {
+        temp = temp->next;
+    }
+    cout << "Middle element: " << temp->val << endl;
+    cout << endl;  
+    }
+
+}
 
 void choice()
 {
@@ -253,6 +286,7 @@ void choice()
     cout << "7. Search" << endl;
     cout << "8. Print list" << endl;
     cout<<"88.prent reversed list"<<endl;
+    cout << "9. Find middle element" << endl;
 
     cout << "10. Count nodes" << endl;
     cout << "0. Exit" << endl;
@@ -337,6 +371,10 @@ int main()
         {
             printReversed();
             cout << endl;
+        }
+        else if (ch == 9)
+        {
+           findMiddleElement();
         }
         else if (ch == 10)
         {
