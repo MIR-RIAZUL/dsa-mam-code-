@@ -268,10 +268,10 @@ void findMiddleElement()
 }
 void insertMiddleofthelist(int x)
 {
-    node* newitem= new node();
-    newitem->val=x;
-    newitem->next=NULL;
-     if(head==NULL)
+    node *newitem = new node();
+    newitem->val = x;
+    newitem->next = NULL;
+    if (head == NULL)
     {
         cout << "List is empty, cannot insert in middle." << endl;
         return;
@@ -293,15 +293,27 @@ void insertMiddleofthelist(int x)
     else
     {
         temp = head;
-        for (int i = 0; i < mid-1; i++)
+        for (int i = 0; i < mid - 1; i++)
         {
             temp = temp->next;
         }
-        newitem->next=temp->next;
-        temp->next=newitem;
+        newitem->next = temp->next;
+        temp->next = newitem;
     }
+}
 
-
+void printNthnode(int x)
+{
+    if (head == NULL)
+    {
+        cout << "this list is empty" << endl;
+    }
+    node *temp = head;
+    for (int i = 0; i < x; i++)
+    {
+        temp = temp->next;
+    }
+    cout << temp->val << endl;
 }
 
 void choice()
@@ -320,6 +332,7 @@ void choice()
     cout << "9. Find middle element" << endl;
     cout << "10. Count nodes" << endl;
     cout << "11. Insert at middle" << endl;
+    cout << "12.printNthnode" << endl;
     cout << "0. Exit" << endl;
 
     cout << "Enter your choice: ";
@@ -411,15 +424,21 @@ int main()
         {
             countNode();
         }
-        else if (ch==11)
+        else if (ch == 11)
         {
             int n;
-          
-            cout<<"enter the value:"<<endl;
-             cin>>n;
+
+            cout << "enter the value:" << endl;
+            cin >> n;
             insertMiddleofthelist(n);
         }
-        
+        else if (ch == 12)
+        {
+            int x;
+            cout << "enter the position" << endl;
+            cin >> x;
+            printNthnode(x);
+        }
 
         else if (ch == 0)
         {
