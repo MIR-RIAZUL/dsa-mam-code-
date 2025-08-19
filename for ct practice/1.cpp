@@ -103,7 +103,31 @@ void insert_in_position(int x,int pos)
         temp = temp->next;
     }
     delete temp->next; // Delete the last node
-    temp->next = NULL; // Set the second last node's next to NULL
+     temp->next = NULL; // Set the second last node's next to NULL
+}
+
+void delete_at_position(int pos)
+{ 
+    if(head == NULL)
+    {
+        cout << "List is empty, cannot delete at position." << endl;
+        return;
+    }
+    else if(pos==0)
+    {
+        deletehead();
+        return;
+    }
+    node* temp = head;
+    for(int i=0; i<pos-1 && temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    node* t0delete = temp->next;
+    temp->next = temp->next->next;
+    delete t0delete; // Delete the node at position
+    
+    
 }
 
 
@@ -191,7 +215,10 @@ int main()
         }
         else if (ch == 6)
         {
-            // Delete at position logic can be added here
+            int pos;
+            cout << "Enter position to delete: ";
+            cin >> pos;
+            delete_at_position(pos);
         }
         else if (ch == 7)
         {
