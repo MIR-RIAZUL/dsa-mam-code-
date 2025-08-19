@@ -73,6 +73,18 @@ void insert_in_position(int x,int pos)
 
  }
 
+ void deletehead()
+ {
+    if (head == NULL)
+    {
+        cout << "List is empty, cannot delete head." << endl;
+        return;
+    }
+    node* temp=head;
+    head = head->next;
+    delete temp;   
+ }
+
 void printlist()
 {
     cout<<endl;
@@ -94,10 +106,10 @@ void printlist()
 
 void choice()
 {
-    cout << "1.Insert at head" << endl;
-    cout << "2.insert at tail" << endl;
+    cout << "1. Insert at head" << endl;
+    cout << "2. insert at tail" << endl;
     cout << "3. Insert at position" << endl;
-    cout << "33. Insert after the value"<< endl;
+    cout << "33.Insert after the value"<< endl;
     cout << "4. Delete at head" << endl;
     cout << "5. Delete at tail" << endl;
     cout << "6. Delete at position" << endl;
@@ -148,7 +160,7 @@ int main()
         }
         else if (ch == 4)
         {
-            // Delete at head logic can be added here
+            deletehead();
         }
         else if (ch == 5)
         {
