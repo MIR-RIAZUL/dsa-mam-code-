@@ -47,7 +47,7 @@ void insert_in_position(int x,int pos)
         return;
     }
     node *temp = head;
-   for(int i=0;i<pos-1;i++)
+   for(int i=1;i<pos-1;i++)
    {
     temp = temp->next;
    }
@@ -150,6 +150,34 @@ void deleteAfrer(int value)
     temp->next = temp->next->next;
     delete t0delete; // Delete the node after the value
 }
+void printReversed(node* head)
+{
+    if (head == NULL)
+    {
+        cout<< "List is empty." << endl;
+        return;
+    }
+
+    node* current = head;
+    node* prev = NULL;
+    node* next = NULL;
+    while (current != NULL)
+    {
+        next = current->next; // Store the next node
+        current->next = prev; // Reverse the link
+        prev = current; // Move prev to current
+        current = next; // Move to the next node
+    }
+    head = prev; // Update head to the new first node
+    cout << "Reversed List: ";
+    node* temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+    
+}
 
 void search(int value)
 {
@@ -206,7 +234,9 @@ void choice()
     cout << "66.Delete after the value" << endl;
     cout << "7. Search" << endl;
     cout << "8. Print list" << endl;
+    cout<<"88.prent reversed list"<<endl;
     cout << "9. Exit" << endl;
+    
     cout << "Enter your choice: ";
     cout << endl;
 }
@@ -271,8 +301,6 @@ int main()
             cin >> value;
             deleteAfrer(value);
         }
-
-
         else if (ch == 7)
         {
             int value;
@@ -285,6 +313,12 @@ int main()
             printlist();
             cout << endl;
         }
+        else if (ch == 88)
+        {
+            printReversed(head);
+            cout << endl;
+        }
+
         else if (ch == 9)
         {
             break; // Exit the loop
