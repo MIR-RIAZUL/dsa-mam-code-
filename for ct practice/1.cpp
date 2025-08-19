@@ -150,7 +150,7 @@ void deleteAfrer(int value)
     temp->next = temp->next->next;
     delete t0delete; // Delete the node after the value
 }
-void printReversed(node* head)
+void printReversed()
 {
     if (head == NULL)
     {
@@ -158,7 +158,7 @@ void printReversed(node* head)
         return;
     }
 
-    node* current = head;
+    node* current = head; 
     node* prev = NULL;
     node* next = NULL;
     while (current != NULL)
@@ -315,7 +315,7 @@ int main()
         }
         else if (ch == 88)
         {
-            printReversed(head);
+            printReversed();
             cout << endl;
         }
 
