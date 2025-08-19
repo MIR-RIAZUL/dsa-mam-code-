@@ -54,6 +54,24 @@ void insert_in_position(int x,int pos)
    newitem->next= temp->next;
    temp->next = newitem;
 }
+ void insert_after_value(int x, int value)
+ {
+    node* newitem = new node();
+    newitem->val = x;
+    if (head == NULL) // If list is empty
+    {
+        cout << "List is empty, cannot insert after value." << endl;
+        return;
+    }
+    node* temp = head;
+    while(temp != NULL && temp->val != value)
+    {
+        temp = temp->next;
+    }
+    newitem->next = temp->next;
+    temp->next = newitem;
+
+ }
 
 void printlist()
 {
@@ -79,6 +97,7 @@ void choice()
     cout << "1.Insert at head" << endl;
     cout << "2.insert at tail" << endl;
     cout << "3. Insert at position" << endl;
+    cout << "33. Insert after the value"<< endl;
     cout << "4. Delete at head" << endl;
     cout << "5. Delete at tail" << endl;
     cout << "6. Delete at position" << endl;
@@ -119,6 +138,13 @@ int main()
             cout << "Enter value to insert and position: ";
             cin >> x >> pos;
             insert_in_position(x, pos);
+        }
+        else if (ch == 33)
+        {
+            int x, value;
+            cout << "Enter value to insert and the value after which to insert: ";
+            cin >> x >> value;
+            insert_after_value(x, value);
         }
         else if (ch == 4)
         {
