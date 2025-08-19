@@ -36,6 +36,25 @@ void insertend(int x)
     temp->next = newitem;
 }
 
+void insert_in_position(int x,int pos)
+{
+    node *newitem = new node();
+    newitem->val = x;
+    if (pos == 0) // Insert at head
+    {
+        newitem->next = head;
+        head = newitem;
+        return;
+    }
+    node *temp = head;
+   for(int i=0;i<pos-1;i++)
+   {
+    temp = temp->next;
+   }
+   newitem->next= temp->next;
+   temp->next = newitem;
+}
+
 void printlist()
 {
     cout<<endl;
@@ -57,7 +76,7 @@ void printlist()
 
 void choice()
 {
-    cout << "1. Insert at head" << endl;
+    cout << "1.Insert at head" << endl;
     cout << "2.insert at tail" << endl;
     cout << "3. Insert at position" << endl;
     cout << "4. Delete at head" << endl;
@@ -95,7 +114,11 @@ int main()
         }
         else if (ch == 3)
         {
-            // Insert at position logic can be added here
+            int x;
+            int pos;
+            cout << "Enter value to insert and position: ";
+            cin >> x >> pos;
+            insert_in_position(x, pos);
         }
         else if (ch == 4)
         {
