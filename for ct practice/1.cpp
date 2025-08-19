@@ -84,6 +84,29 @@ void insert_in_position(int x,int pos)
     head = head->next;
     delete temp;   
  }
+ void deletetail()
+ {
+    if(head == NULL)
+    {
+        cout << "List is empty, cannot delete tail." << endl;
+        return;
+    }
+    if(head->next == NULL) // Only one element
+    {
+        delete head;
+        head = NULL;
+        return;
+    }
+    node* temp = head;
+    while(temp->next->next != NULL) // Traverse to the second last node
+    {
+        temp = temp->next;
+    }
+    delete temp->next; // Delete the last node
+    temp->next = NULL; // Set the second last node's next to NULL
+}
+
+
 
 void printlist()
 {
@@ -164,7 +187,7 @@ int main()
         }
         else if (ch == 5)
         {
-            // Delete at tail logic can be added here
+            deletetail();
         }
         else if (ch == 6)
         {
