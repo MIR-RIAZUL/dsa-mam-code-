@@ -129,8 +129,27 @@ void delete_at_position(int pos)
     
     
 }
-
-
+void deleteAfrer(int value)
+{
+    if(head == NULL)
+    {
+        cout << "List is empty, cannot delete after value." << endl;
+        return;
+    }
+    node* temp = head;
+    while(temp->val !=value)
+    {
+        if(temp->next == NULL)
+        {
+            cout << "Value not found in the list." << endl;
+            return;
+        }
+        temp = temp->next;
+    }
+    node* t0delete = temp->next;
+    temp->next = temp->next->next;
+    delete t0delete; // Delete the node after the value
+}
 
 void printlist()
 {
@@ -160,6 +179,7 @@ void choice()
     cout << "4. Delete at head" << endl;
     cout << "5. Delete at tail" << endl;
     cout << "6. Delete at position" << endl;
+    cout << "66.Delete after the value" << endl;
     cout << "7. Search" << endl;
     cout << "8. Print list" << endl;
     cout << "9. Exit" << endl;
@@ -220,6 +240,15 @@ int main()
             cin >> pos;
             delete_at_position(pos);
         }
+        else if (ch == 66)
+        {
+            int value;
+            cout << "Enter value after which to delete: ";
+            cin >> value;
+            deleteAfrer(value);
+        }
+
+
         else if (ch == 7)
         {
             // Search logic can be added here
