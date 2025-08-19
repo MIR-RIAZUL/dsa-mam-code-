@@ -315,6 +315,26 @@ void printNthnode(int x)
     }
     cout << temp->val << endl;
 }
+void nthNodefromMiddle(int x)
+{
+    if (head == NULL)
+    {
+        cout << "List is empty." << endl;
+        return;
+    }
+    node *temp = head;
+    int count = 0;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+
+    int mid = count / 2;
+    int nod = mid - x;
+    printNthnode(nod);
+    return;
+}
 
 void choice()
 {
@@ -333,6 +353,7 @@ void choice()
     cout << "10. Count nodes" << endl;
     cout << "11. Insert at middle" << endl;
     cout << "12.printNthnode" << endl;
+    cout << "13.nthNodefromMiddle" << endl;
     cout << "0. Exit" << endl;
 
     cout << "Enter your choice: ";
@@ -438,6 +459,13 @@ int main()
             cout << "enter the position" << endl;
             cin >> x;
             printNthnode(x);
+        }
+        else if (ch == 13)
+        {
+            int x;
+            cout << "enter the position from mid" << endl;
+            cin >> x;
+            nthNodefromMiddle(x);
         }
 
         else if (ch == 0)
