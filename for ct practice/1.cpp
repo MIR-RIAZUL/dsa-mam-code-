@@ -151,6 +151,30 @@ void deleteAfrer(int value)
     delete t0delete; // Delete the node after the value
 }
 
+void search(int value)
+{
+    if(head == NULL)
+    {
+        cout << "List is empty, cannot search." << endl;
+        return;
+    }
+    node* temp = head;
+    int count=0;
+    while(temp != NULL)
+    {
+      
+        if(temp->val == value)
+        {
+            cout << "Value " << value << " found in the list." << endl;
+            cout << "Position: " << count << endl;
+            return;
+        }
+        temp = temp->next;
+        count++;
+    }
+    cout << "Value " << value << " not found in the list." << endl;
+}
+
 void printlist()
 {
     cout<<endl;
@@ -251,7 +275,10 @@ int main()
 
         else if (ch == 7)
         {
-            // Search logic can be added here
+            int value;
+            cout << "Enter value to search: ";
+            cin >> value;
+            search(value);
         }
         else if (ch == 8)
         {
