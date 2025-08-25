@@ -336,6 +336,11 @@ void nthNodefromMiddle(int x)
     return;
 }
 
+void isplaindrome()
+{
+    
+}
+
 void choice()
 {
     cout << "1. Insert at head" << endl;
