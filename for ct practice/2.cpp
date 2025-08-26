@@ -280,3 +280,18 @@ int main()
     cout << "Exiting program." << endl;
     return 0;
 }
+//linklist to array
+
+
+// // Function to convert a singly linked list into an array
+// void To_Array(struct node *head, int *array) {
+//     struct node *current = head;
+//     int i = 0;
+//     // Traverse the linked list and copy elements to the array
+//     while (current != NULL) {
+//         array[i] = current->num;
+//         current = current->nextptr;
+//         i++;
+//     }
+// }
+
