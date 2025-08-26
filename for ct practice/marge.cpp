@@ -325,3 +325,43 @@ int main() {
 }
 
 
+//add list
+
+Node* addLists(Node* list1, Node* list2) {
+    Node* res = nullptr;
+    Node* temp, *prev = nullptr;
+    int carry = 0, sum;
+
+    // Traverse both lists and perform addition
+    while (list1 != nullptr || list2 != nullptr) {
+        sum = carry + (list1 ? list1->data : 0) + (list2 ? list2->data : 0);
+
+        // Calculate carry
+        carry = (sum >= 10) ? 1 : 0;
+        sum = sum % 10;
+
+        // Create new node with sum
+        temp = new Node(sum);
+
+        if (res == nullptr)
+            res = temp;
+        else
+            prev->next = temp;
+
+        prev = temp;
+
+        // Move to next nodes
+        if (list1) list1 = list1->next;
+        if (list2) list2 = list2->next;
+    }
+
+    // If carry remains
+    if (carry > 0)
+        temp->next = new Node(carry);
+
+    return res;
+}
+
+
+
+
