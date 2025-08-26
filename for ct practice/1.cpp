@@ -336,18 +336,37 @@ void nthNodefromMiddle(int x)
     return;
 }
 
-node* delete_last_node(node* head, int n) {
-    Node *p = head, *q = head; // Initializing pointers p and q to head node
-    while (n--) q = q->next; // Moving q 'n' nodes ahead from head
-    if (!q) return head->next; // If q reaches the end, remove the first node
-    while (q->next) { // Until q reaches the end
-        p = p->next; // Move p forward
-        q = q->next; // Move q forward
+// node* delete_last_node(node* head, int n) {
+//     Node *p = head, *q = head; // Initializing pointers p and q to head node
+//     while (n--) q = q->next; // Moving q 'n' nodes ahead from head
+//     if (!q) return head->next; // If q reaches the end, remove the first node
+//     while (q->next) { // Until q reaches the end
+//         p = p->next; // Move p forward
+//         q = q->next; // Move q forward
+//     }
+//     Node* toDelete = p->next; // Node to be deleted
+//     p->next = p->next->next; // Deleting the node
+//     delete toDelete; // Freeing the memory of the deleted node
+//     return head; // Returning the head of the updated list
+// }
+
+void sort()
+{
+    node* i=head;
+    node* j=head;
+
+    for( node* i=head;i !=NULL;i=i->next)
+    {
+        for(node* j=head;j!=NULL;j=j->next)
+        {
+            if(i->val>j->val)
+            {
+                int temp= i->val;
+                i->val=j->val;
+                j->val=temp;
+            }
+        }
     }
-    Node* toDelete = p->next; // Node to be deleted
-    p->next = p->next->next; // Deleting the node
-    delete toDelete; // Freeing the memory of the deleted node
-    return head; // Returning the head of the updated list
 }
 
 void isplaindrome()
@@ -373,6 +392,7 @@ void choice()
     cout << "11. Insert at middle" << endl;
     cout << "12.printNthnode" << endl;
     cout << "13.nthNodefromMiddle" << endl;
+    cout<<"14.sort"<<endl;
     cout << "0. Exit" << endl;
 
     cout << "Enter your choice: ";
@@ -485,6 +505,10 @@ int main()
             cout << "enter the position from mid" << endl;
             cin >> x;
             nthNodefromMiddle(x);
+        }
+        else if (ch == 14)
+        {
+            sort();
         }
 
         else if (ch == 0)
