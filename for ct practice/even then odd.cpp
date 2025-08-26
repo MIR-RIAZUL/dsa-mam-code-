@@ -39,3 +39,37 @@ void merge_alternate_Nodes(Node** head1_ref, Node** head2_ref) {
 
     *head2_ref = p2; // Remaining nodes of second list
 }
+//end.......
+
+
+
+
+//conditional change
+
+
+// Function to remove all nodes with data greater than x
+void remove_specific(Node** head, int x) {
+    Node* temp = *head;
+    Node* prev = NULL;
+
+    // Remove nodes from the start if they are greater than x
+    while (temp != NULL && temp->data > x) {
+        *head = temp->next;
+        delete temp;
+        temp = *head;
+    }
+
+    // Traverse the remaining list
+    while (temp != NULL) {
+        while (temp != NULL && temp->data <= x) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == NULL) return;
+
+        prev->next = temp->next;
+        delete temp;
+        temp = prev->next;
+    }
+}
