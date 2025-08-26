@@ -362,6 +362,112 @@ Node* addLists(Node* list1, Node* list2) {
     return res;
 }
 
+//remove odd index
+
+void removeOddIndices(Node*& head) {
+    Node* current = head;
+    Node* prev = nullptr;
+    int count = 1;  // Start index from 1
+
+    while (current != nullptr) {
+        if (count % 2 == 1) {  // Odd index
+            if (prev == nullptr) {  // Removing head
+                head = current->next;
+            } else {
+                prev->next = current->next;
+            }
+            Node* temp = current;
+            current = current->next;
+            delete temp;  // C++ uses delete instead of free
+        } else {
+            prev = current;
+            current = current->next;
+        }
+        count++;
+    }
+}
+//odd value
+
+void removeOddValues(Node*& head) {
+    Node* current = head;
+    Node* prev = nullptr;
+
+    while (current != nullptr) {
+        if (current->data % 2 == 1) {  // Odd value
+            if (prev == nullptr) {  // Removing head
+                head = current->next;
+            } else {
+                prev->next = current->next;
+            }
+            Node* temp = current;
+            current = current->next;
+            delete temp;
+        } else {
+            prev = current;
+            current = current->next;
+        }
+    }
+}
+
+//roteate list
+
+void rotateList(Node*& head, int k) {
+    if (!head || k == 0) return;
+
+    Node* current = head;
+    int count = 1;
+
+    // Find the last node and count total nodes
+    while (current->next) {
+        current = current->next;
+        count++;
+    }
+
+    // Connect last node to head → make it circular
+    current->next = head;
+
+    // Find (count - k % count)th node
+    for (int i = 0; i < count - (k % count); i++) {
+        current = current->next;
+    }
+
+    // New head will be next node
+    head = current->next;
+
+    // Break circular link
+    current->next = nullptr;
+}
+
+//sweaping node
+void swapKthNode(Node* head, int k) {
+    if (!head) return;
+
+    // Count total nodes
+    int n = 0;
+    Node* temp = head;
+    while (temp) {
+        n++;
+        temp = temp->next;
+    }
+
+    // Check if k is valid or middle node
+    if (k > n || 2 * k - 1 == n) return;
+
+    // Find kth node from beginning
+    Node* a = head;
+    for (int i = 1; i < k; i++)
+        a = a->next;
+
+    // Find kth node from end
+    Node* b = head;
+    for (int i = 1; i < n - k + 1; i++)
+        b = b->next;
+
+    // Swap data
+    int t = a->data;
+    a->data = b->data;
+    b->data = t;
+}
 
 
 
