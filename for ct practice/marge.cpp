@@ -217,3 +217,20 @@ int main() {
 
     return 0;
 }
+
+
+//reomve duplicat
+
+void removeDuplicates(Node* head) {
+    Node* curr = head;
+    while (curr && curr->next) {
+        if (curr->data == curr->next->data) {
+            Node* dup = curr->next;
+            curr->next = curr->next->next;
+            delete dup;
+        } else {
+            curr = curr->next;
+        }
+    }
+}
+
