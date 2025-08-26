@@ -109,3 +109,111 @@ int main() {
 
     return 0;
 }
+
+
+
+//palindrome
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int val) {
+        data = val;
+        next = NULL;
+    }
+};
+
+// Insert at end
+void insert(Node*& head, int val) {
+    Node* newNode = new Node(val);
+    if (!head) {
+        head = newNode;
+        return;
+    }
+    Node* temp = head;
+    while (temp->next) temp = temp->next;
+    temp->next = newNode;
+}
+
+// Print list
+void printList(Node* head) {
+    while (head) {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+// Reverse a list
+Node* reverse(Node* head) {
+    Node* prev = NULL;
+    Node* curr = head;
+    Node* next = NULL;
+
+    while (curr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+// Check palindrome
+bool isPalindrome(Node* head) {
+    if (!head || !head->next) return true;
+
+    // Step 1: Find middle
+    Node* slow = head;
+    Node* fast = head;
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // Step 2: Reverse second half
+    Node* secondHalf = reverse(slow->next);
+
+    // Step 3: Compare first and second half
+    Node* firstHalf = head;
+    Node* tempSecond = secondHalf;
+    bool palindrome = true;
+
+    while (tempSecond) {
+        if (firstHalf->data != tempSecond->data) {
+            palindrome = false;
+            break;
+        }
+        firstHalf = firstHalf->next;
+        tempSecond = tempSecond->next;
+    }
+
+    // (Optional) Restore list
+    slow->next = reverse(secondHalf);
+
+    return palindrome;
+}
+
+int main() {
+    Node* head = NULL;
+
+    // Example: Palindrome list
+    insert(head, 1);
+    insert(head, 2);
+    insert(head, 3);
+    insert(head, 2);
+    insert(head, 1);
+
+    cout << "Linked List: ";
+    printList(head);
+
+    if (isPalindrome(head))
+        cout << "Yes, it is a Palindrome\n";
+    else
+        cout << "No, it is NOT a Palindrome\n";
+
+    return 0;
+}
