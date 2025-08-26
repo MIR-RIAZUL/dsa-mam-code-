@@ -234,3 +234,94 @@ void removeDuplicates(Node* head) {
     }
 }
 
+//intersection finder
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int val) {
+        data = val;
+        next = NULL;
+    }
+};
+
+// Insert at end
+void insert(Node*& head, int val) {
+    Node* newNode = new Node(val);
+    if (!head) {
+        head = newNode;
+        return;
+    }
+    Node* temp = head;
+    while (temp->next) temp = temp->next;
+    temp->next = newNode;
+}
+
+// Get length of list
+int getLength(Node* head) {
+    int len = 0;
+    while (head) {
+        len++;
+        head = head->next;
+    }
+    return len;
+}
+
+// Find intersection
+Node* getIntersection(Node* head1, Node* head2) {
+    int len1 = getLength(head1);
+    int len2 = getLength(head2);
+
+    // Align both lists
+    Node* p1 = head1;
+    Node* p2 = head2;
+
+    if (len1 > len2) {
+        int diff = len1 - len2;
+        while (diff--) p1 = p1->next;
+    } else {
+        int diff = len2 - len1;
+        while (diff--) p2 = p2->next;
+    }
+
+    // Move together until intersection found
+    while (p1 && p2) {
+        if (p1 == p2) return p1;
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+    return NULL; // No intersection
+}
+
+int main() {
+    // Create first list: 10 -> 20 -> 30 -> 70 -> 80
+    Node* head1 = new Node(10);
+    head1->next = new Node(20);
+    head1->next->next = new Node(30);
+
+    // Create second list: 15 -> 25 -> (join at 70)
+    Node* head2 = new Node(15);
+    head2->next = new Node(25);
+
+    // Common part: 70 -> 80
+    Node* common = new Node(70);
+    common->next = new Node(80);
+
+    // Connect common part
+    head1->next->next->next = common; // 30 -> 70
+    head2->next->next = common;       // 25 -> 70
+
+    Node* intersection = getIntersection(head1, head2);
+
+    if (intersection)
+        cout << "Intersection at node with value: " << intersection->data << endl;
+    else
+        cout << "No intersection found" << endl;
+
+    return 0;
+}
+
+
