@@ -1,29 +1,47 @@
 #include <iostream>
 using namespace std;
 
+// Node structure
 struct Node {
     int data;
     Node* next;
-    Node(int val) {
-        data = val;
-        next = NULL;
-    }
 };
 
-// Insert at end
-void insert(Node*& head, int val) {
-    Node* newNode = new Node(val);
-    if (!head) {
-        head = newNode;
-        return;
-    }
-    Node* temp = head;
-    while (temp->next) temp = temp->next;
-    temp->next = newNode;
+// Function to create a new node
+Node* newNode(int data) {
+    Node* node = new Node;
+    node->data = data;
+    node->next = nullptr;
+    return node;
 }
 
-// Print list
-void printList(Node* head) {
+// Function to merge two sorted linked lists
+Node* mergeTwoLists(Node* head1, Node* head2) {
+    if (!head1) return head2;
+    if (!head2) return head1;
+
+    Node dummy;
+    Node* tail = &dummy;
+    dummy.next = nullptr;
+
+    while (head1 && head2) {
+        if (head1->data < head2->data) {
+            tail->next = head1;
+            head1 = head1->next;
+        } else {
+            tail->next = head2;
+            head2 = head2->next;
+        }
+        tail = tail->next;
+    }
+
+    tail->next = head1 ? head1 : head2;
+
+    return dummy.next;
+}
+
+// Function to display a linked list
+void displayList(Node* head) {
     while (head) {
         cout << head->data << " ";
         head = head->next;
@@ -31,84 +49,112 @@ void printList(Node* head) {
     cout << endl;
 }
 
-// Merge two sorted lists
-Node* mergeSorted(Node* l1, Node* l2) {
-    if (!l1) return l2;
-    if (!l2) return l1;
-
-    if (l1->data < l2->data) {
-        l1->next = mergeSorted(l1->next, l2);
-        return l1;
-    } else {
-        l2->next = mergeSorted(l1, l2->next);
-        return l2;
-    }
-}
-
-// Split list for merge sort
-void splitList(Node* source, Node*& front, Node*& back) {
-    Node* slow = source;
-    Node* fast = source->next;
-
-    while (fast && fast->next) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-
-    front = source;
-    back = slow->next;
-    slow->next = NULL;
-}
-
-// Merge sort for linked list
-Node* mergeSort(Node* head) {
-    if (!head || !head->next) return head;
-
-    Node* front;
-    Node* back;
-    splitList(head, front, back);
-
-    front = mergeSort(front);
-    back = mergeSort(back);
-
-    return mergeSorted(front, back);
-}
-
+// Main function
 int main() {
-    Node* list1 = NULL;
-    Node* list2 = NULL;
+    // Create first sorted list: 1 -> 3 -> 5 -> 7
+    Node* list1 = newNode(1);
+    list1->next = newNode(3);
+    list1->next->next = newNode(5);
+    list1->next->next->next = newNode(7);
 
-    // Example input
-    insert(list1, 7);
-    insert(list1, 2);
-    insert(list1, 9);
+    // Create second sorted list: 2 -> 4 -> 6
+    Node* list2 = newNode(2);
+    list2->next = newNode(4);
+    list2->next->next = newNode(6);
 
-    insert(list2, 5);
-    insert(list2, 3);
-    insert(list2, 8);
+    cout << "Two sorted singly linked lists:\n";
+    displayList(list1);
+    displayList(list2);
 
-    cout << "List 1 before sort: ";
+    Node* result = mergeTwoLists(list1, list2);
+    cout << "\nAfter merging the two sorted lists:\n";
+    displayList(result);
+
+    return 0;
+}
+
+
+
+#include <iostream>
+using namespace std;
+
+// Node structure
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Function to create a new node
+Node* newNode(int val) {
+    Node* node = new Node;
+    node->data = val;
+    node->next = NULL;  // Use NULL instead of nullptr
+    return node;
+}
+
+// Function to print a linked list
+void printList(Node* head) {
+    while (head != NULL) {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+// Function to merge two sorted linked lists iteratively
+Node* mergeTwoLists(Node* l1, Node* l2) {
+    Node dummy;
+    Node* tail = &dummy;
+    dummy.next = NULL;
+
+    while (l1 != NULL && l2 != NULL) {
+        if (l1->data < l2->data) {
+            tail->next = l1;
+            l1 = l1->next;
+        } else {
+            tail->next = l2;
+            l2 = l2->next;
+        }
+        tail = tail->next;
+    }
+
+    // Append remaining nodes
+    if (l1 != NULL) tail->next = l1;
+    if (l2 != NULL) tail->next = l2;
+
+    return dummy.next;
+}
+
+// Driver code
+int main() {
+    // First sorted linked list: 1 -> 3 -> 5
+    Node* list1 = newNode(1);
+    list1->next = newNode(3);
+    list1->next->next = newNode(5);
+
+    // Second sorted linked list: 2 -> 4 -> 6
+    Node* list2 = newNode(2);
+    list2->next = newNode(4);
+    list2->next->next = newNode(6);
+
+    cout << "List 1: ";
     printList(list1);
-    cout << "List 2 before sort: ";
+    cout << "List 2: ";
     printList(list2);
 
-    // Sort both lists
-    list1 = mergeSort(list1);
-    list2 = mergeSort(list2);
-
-    cout << "List 1 after sort: ";
-    printList(list1);
-    cout << "List 2 after sort: ";
-    printList(list2);
-
-    // Merge sorted lists
-    Node* merged = mergeSorted(list1, list2);
-
-    cout << "Merged Sorted List: ";
+    Node* merged = mergeTwoLists(list1, list2);
+    cout << "\nMerged Sorted List: ";
     printList(merged);
 
     return 0;
 }
+
+
+
+
+
+
+
 
 
 
@@ -386,7 +432,7 @@ void removeOddIndices(Node*& head) {
         count++;
     }
 }
-//odd value
+//odd value remove
 
 void removeOddValues(Node*& head) {
     Node* current = head;
@@ -439,6 +485,8 @@ void rotateList(Node*& head, int k) {
 }
 
 //sweaping node
+
+
 void swapKthNode(Node* head, int k) {
     if (!head) return;
 
