@@ -336,6 +336,20 @@ void nthNodefromMiddle(int x)
     return;
 }
 
+node* delete_last_node(node* head, int n) {
+    Node *p = head, *q = head; // Initializing pointers p and q to head node
+    while (n--) q = q->next; // Moving q 'n' nodes ahead from head
+    if (!q) return head->next; // If q reaches the end, remove the first node
+    while (q->next) { // Until q reaches the end
+        p = p->next; // Move p forward
+        q = q->next; // Move q forward
+    }
+    Node* toDelete = p->next; // Node to be deleted
+    p->next = p->next->next; // Deleting the node
+    delete toDelete; // Freeing the memory of the deleted node
+    return head; // Returning the head of the updated list
+}
+
 void isplaindrome()
 {
     
@@ -486,3 +500,4 @@ int main()
     printlist();
     return 0;
 }
+

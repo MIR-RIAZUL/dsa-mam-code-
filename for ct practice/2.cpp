@@ -60,7 +60,88 @@ void insert_nth_node(int pos,int x)
 
 void after_value(int x,int val)
 {
-     b   
+     node* newnode= createnode(x);
+
+     node* temp=head;
+
+     while(temp->data !=val)
+     {
+        temp=temp->next;
+     }
+     newnode->next =temp->next;
+     temp->next=newnode;
+}
+void deletHead()
+{
+    node* temp= head;
+    head=head->next;
+    delete temp;
+
+}
+
+void deleteTail()
+{
+    node* temp= head;
+    while(temp->next->next !=NULL)
+    {
+        temp=temp->next;
+    }
+    delete temp->next;
+    temp->next=NULL;
+
+}
+void deletNth(int num)
+{
+    node* temp=head;
+    for(int i=0;i<num-1;i++)
+    {
+        temp=temp->next;
+    }
+    node* todelete=temp->next;
+    temp->next=temp->next->next;
+    delete todelete;
+
+}
+
+void deleteAfter(int x)
+{
+    node* temp=head;
+
+    while(temp->data !=x)
+    {
+        temp=temp->next;
+    }
+    node* todelete=temp->next;
+    temp->next=temp->next->next;
+    delete todelete;
+}
+
+void reverseList()
+{
+    node* pre =NULL;
+    node* current =head;
+    node* next =NULL;
+    while(current!=NULL)
+    {
+        next= current->next;
+        current ->next=pre;
+        pre =current;
+        current=next;
+    }
+    head=pre;
+
+}
+node* findMiddle()
+{
+    node* slow=head;
+    node* fast=head;
+
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    return slow;
 }
 
 
@@ -125,21 +206,41 @@ int main()
         }
         else if (ch == 33)
         {
+            int x,val;
+
+            cout<<"enter the data"<<endl;
+            cin>>x;
+            cout<<"enter the number that you want to place to the next"<<endl;
+            cin>>val;
+
+            after_value( x,val);
         }
         else if (ch == 4)
         {
+            deletHead();
         }
         else if (ch == 5)
         {
+            deleteTail();
         }
         else if (ch == 6)
         {
+            cout<<"enter the position you want to delete"<<endl;
+            int pos;
+            cin>>pos;
+         deletNth(pos);
+
         }
         else if (ch == 66)
         {
+            cout<<"enter the value,that you want to delete After"<<endl;
+            int x;
+            cin>>x;
+            deleteAfter(x);
         }
         else if (ch == 7)
         {
+
         }
         else if (ch == 8)
         {
@@ -147,9 +248,12 @@ int main()
         }
         else if (ch == 88)
         {
+            reverseList();
         }
         else if (ch == 9)
         {
+         cout<<findMiddle()->data<<endl;
+
         }
         else if (ch == 10)
         {
