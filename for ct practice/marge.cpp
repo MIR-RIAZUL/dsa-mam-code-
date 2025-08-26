@@ -152,12 +152,6 @@ int main() {
 
 
 
-
-
-
-
-
-
 //palindrome
 
 #include <iostream>
