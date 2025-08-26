@@ -73,3 +73,23 @@ void remove_specific(Node** head, int x) {
         temp = prev->next;
     }
 }
+
+end.....
+
+//sorted linklist remove
+
+void remove_Duplicates(Node* head) {
+    if (head == nullptr) return;
+
+    Node* curr = head;
+
+    while (curr->next != nullptr) {
+        if (curr->data == curr->next->data) {
+            Node* temp = curr->next;
+            curr->next = curr->next->next;
+            delete temp;
+        } else {
+            curr = curr->next;
+        }
+    }
+}
