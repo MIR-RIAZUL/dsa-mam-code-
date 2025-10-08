@@ -42,7 +42,8 @@ void display()
 {
     for(int i=0;i<current_size;i++)
     {
-        cout<<q[i]<<" ";
+        int index=(front+i)% MAx_SIZE;
+        cout<<q[index]<<" ";
     }
     cout<<endl;
 }
@@ -75,7 +76,7 @@ int main()
         }
         else if (ch==2)
         {
-            /* code */
+            dequeue();
         }
         else if (ch==3)
         {
