@@ -24,12 +24,27 @@ void enqueue(int x)
     }
 }
 
+int dequeue()
+{
+    if(current_size==0)
+    cout<<"underflow"<<endl;
+    else
+    {
+        int temp=q[front];
+        q[front]=-1000;
+        front=(front+1)%MAx_SIZE;
+        current_size--;
+        return temp;
+    }
+}
+
 void display()
 {
-    for(int i=0;i<MAx_SIZE;i++)
+    for(int i=0;i<current_size;i++)
     {
         cout<<q[i]<<" ";
     }
+    cout<<endl;
 }
 
 void menu()
@@ -64,7 +79,7 @@ int main()
         }
         else if (ch==3)
         {
-            
+            display();
         }
         
         
